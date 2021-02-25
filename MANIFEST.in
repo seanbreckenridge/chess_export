@@ -1,0 +1,3 @@
+include LICENSE
+include mypy.ini
+recursive-include chessdotcom_export *.typed
