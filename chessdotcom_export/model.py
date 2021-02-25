@@ -48,9 +48,10 @@ class Game(NamedTuple):
 
     @classmethod
     def from_api_response(cls, api_resp: Json) -> "Game":
+        # the pgn typically exists, but may not for some older games?, unsure why
         return cls(
             url=api_resp["url"],
-            pgn=api_resp.get("pgn"), # typically exists, but may not for some, unsure why
+            pgn=api_resp.get("pgn"),
             fen=api_resp["fen"],
             time_control=api_resp["time_control"],
             end_time=datetime.fromtimestamp(api_resp["end_time"], tz=timezone.utc),
