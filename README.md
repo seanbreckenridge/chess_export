@@ -1,4 +1,6 @@
-## chessdotcom_export
+# chessdotcom_export
+
+[![PyPi version](https://img.shields.io/pypi/v/chessdotcom_export.svg)](https://pypi.python.org/pypi/chessdotcom_export) [![Python 3.7|3.8|3.9](https://img.shields.io/pypi/pyversions/chessdotcom_export.svg)](https://pypi.python.org/pypi/chessdotcom_export) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 Export your chess.com games using the public API. [Published-Data API Docs](https://www.chess.com/news/view/published-data-api)
 
@@ -8,7 +10,7 @@ Requires `python3.6+`
 
 To install with pip, run:
 
-    pip install chessdotcom_export
+    pip install chessdotcom-export
 
 ---
 
