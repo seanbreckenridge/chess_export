@@ -78,7 +78,7 @@ You can also run the commands from python:
 ```
 In [1]: import chessdotcom_export
 
-In [2]: games = list(chessdotcom_export.get_player_games("seanbreckenridge"))
+In [2]: games = list(map(lambda j: chessdotcom_export.Game.from_api_response(j), chessdotcom_export.get_player_games("seanbreckenridge")))
 Requesting https://api.chess.com/pub/player/seanbreckenridge/games/archives
 Requesting https://api.chess.com/pub/player/seanbreckenridge/games/2021/01
 Requesting https://api.chess.com/pub/player/seanbreckenridge/games/2021/02
@@ -99,4 +99,3 @@ git clone 'https://github.com/seanbreckenridge/chessdotcom_export'
 cd ./chessdotcom_export
 pip install '.[testing]'
 mypy ./chessdotcom_export
-```

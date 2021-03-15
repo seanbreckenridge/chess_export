@@ -3,14 +3,13 @@ Request/Export your games from chess.com
 """
 
 import time
-from typing import Iterator, Dict, List
+from typing import Iterator, List
 from functools import partial
 
 import requests
 import click
 
 from .common import Json
-from .model import Game
 
 eprint = partial(click.echo, err=True)
 
@@ -34,16 +33,6 @@ def chessdotcom_request(url: str) -> Json:
         return resp.json()
 
 
-def _key_or_error(resp: Json, key: str) -> Json:
-    """Get value from dictionary with the key. Throw a RuntimeError if its not present on the object"""
-    if key in resp:
-        return resp[key]
-    else:
-        raise KeyError(
-            "Error: expected key {}, couldn't find on object: {}".format(key, resp)
-        )
-
-
 def get_player_game_archives(username: str) -> List[str]:
     """Returns a list of monthly archive URLs for the user"""
     url = CHESSDOTCOM_BASE_URL + "/".join(("player", username, "games", "archives"))
@@ -51,9 +40,9 @@ def get_player_game_archives(username: str) -> List[str]:
     return list(mresp["archives"])
 
 
-def get_player_games(username: str) -> Iterator[Game]:
+def get_player_games(username: str) -> Iterator[Json]:
     """Returns all accessible games, using the monthly archive as the source"""
     for archive_url in get_player_game_archives(username):
         gresp = chessdotcom_request(archive_url)
         for game in gresp["games"]:
-            yield Game.from_api_response(game)
+            yield game

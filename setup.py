@@ -7,9 +7,10 @@ requirements = ["click>=7.0", "requests", "IPython"]
 with io.open("README.md", encoding="utf-8") as fo:
     long_description = fo.read()
 
+pkg = "chessdotcom_export"
 setup(
-    name="chessdotcom_export",
-    version="0.1.0",
+    name=pkg,
+    version="0.1.1",
     url="https://github.com/seanbreckenridge/chessdotcom_export",
     author="Sean Breckenridge",
     author_email="seanbrecke@gmail.com",
@@ -23,6 +24,7 @@ setup(
     entry_points={
         "console_scripts": ["chessdotcom_export = chessdotcom_export.__main__:main"]
     },
+    package_data={pkg: ["py.typed"]},
     extras_require={"testing": ["mypy"]},
     classifiers=[
         "License :: OSI Approved :: MIT License",

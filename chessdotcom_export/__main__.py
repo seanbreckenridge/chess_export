@@ -1,4 +1,3 @@
-import sys
 import json
 from typing import List, Any
 
@@ -25,7 +24,7 @@ def export(username: str) -> None:
     """
     games: List[Any] = []
     for game in get_player_games(username):
-        games.append(game.to_dict())
+        games.append(game)
     click.echo(json.dumps(games, sort_keys=True))
 
 
