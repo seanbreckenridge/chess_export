@@ -1,9 +1,10 @@
 import json
-from typing import List, Any
+from typing import List
 
 import click
 import IPython  # type: ignore[import]
 
+from .common import Json
 from .export import get_player_games
 from .model import Game, from_export
 
@@ -22,9 +23,7 @@ def export(username: str) -> None:
     """
     Export your chess games
     """
-    games: List[Any] = []
-    for game in get_player_games(username):
-        games.append(game)
+    games: List[Json] = list(get_player_games(username))
     click.echo(json.dumps(games, sort_keys=True))
 
 

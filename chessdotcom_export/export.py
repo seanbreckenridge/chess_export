@@ -43,6 +43,4 @@ def get_player_game_archives(username: str) -> List[str]:
 def get_player_games(username: str) -> Iterator[Json]:
     """Returns all accessible games, using the monthly archive as the source"""
     for archive_url in get_player_game_archives(username):
-        gresp = chessdotcom_request(archive_url)
-        for game in gresp["games"]:
-            yield game
+        yield from chessdotcom_request(archive_url)["games"]
