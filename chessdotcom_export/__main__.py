@@ -40,7 +40,7 @@ def inspect(from_: str) -> None:
     """
     Parse an exported JSON file and interact with it
     """
-    games: List[Game] = from_export(from_)
+    games: List[Game] = list(from_export(from_))
     click.echo("Use the 'games' variable to interact")
     IPython.embed()
 
