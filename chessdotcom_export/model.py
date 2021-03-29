@@ -5,7 +5,7 @@ Parse and Serialize the Game response from chess.com
 import json
 
 from datetime import datetime, timezone
-from typing import NamedTuple, List, Optional
+from typing import NamedTuple, List, Optional, Iterator
 
 from .common import Json
 
@@ -77,13 +77,10 @@ class Game(NamedTuple):
         }
 
 
-def from_export(filepath: str) -> List[Game]:
+def from_export(filepath: str) -> Iterator[Game]:
     """
     Parse a chessdotcom_export file
     """
-    games: List[Game] = []
     with open(filepath) as f:
-        obj: Json = json.load(f)
-        for gobj in obj:
-            games.append(Game.from_api_response(gobj))
-    return games
+        for gobj in json.load(f):
+            yield Game.from_api_response(gobj)
