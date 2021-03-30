@@ -2,7 +2,6 @@ import json
 from typing import List
 
 import click
-import IPython  # type: ignore[import]
 
 from .common import Json
 from .export import get_player_games
@@ -41,7 +40,9 @@ def inspect(from_: str) -> None:
     Parse an exported JSON file and interact with it
     """
     games: List[Game] = list(from_export(from_))
-    click.echo("Use the 'games' variable to interact")
+    click.secho("Use the 'games' variable to interact", fg="green")
+    import IPython  # type: ignore[import]
+
     IPython.embed()
 
 
