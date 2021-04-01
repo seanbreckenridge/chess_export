@@ -10,7 +10,7 @@ with io.open("README.md", encoding="utf-8") as fo:
 pkg = "chessdotcom_export"
 setup(
     name=pkg,
-    version="0.1.2",
+    version="0.1.3",
     url="https://github.com/seanbreckenridge/chessdotcom_export",
     author="Sean Breckenridge",
     author_email="seanbrecke@gmail.com",

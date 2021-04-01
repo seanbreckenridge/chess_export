@@ -33,13 +33,12 @@ The only required argument is your username, the API serves public data and has 
 #### inspect
 
 ```
-Usage: chessdotcom_export inspect [OPTIONS]
+Usage: chessdotcom_export inspect [OPTIONS] FROM_FILE
 
   Parse an exported JSON file and interact with it
 
 Options:
-  -f, --from-file PATH  Exported file to read from  [required]
-  --help                Show this message and exit.
+  --help  Show this message and exit.
 ```
 
 ### Example
@@ -51,7 +50,7 @@ $ chessdotcom_export export seanbreckenridge >data.json
 Requesting https://api.chess.com/pub/player/seanbreckenridge/games/archives
 Requesting https://api.chess.com/pub/player/seanbreckenridge/games/2021/01
 Requesting https://api.chess.com/pub/player/seanbreckenridge/games/2021/02
-$ chessdotcom_export inspect -f data.json
+$ chessdotcom_export inspect data.json
 
 In [1]: import io, chess.pgn
 

@@ -27,19 +27,16 @@ def export(username: str) -> None:
 
 
 @main.command()
-@click.option(
-    "--from-file",
-    "-f",
-    "from_",
+@click.argument(
+    "FROM_FILE",
     type=click.Path(exists=True),
     required=True,
-    help="Exported file to read from",
 )
-def inspect(from_: str) -> None:
+def inspect(from_file: str) -> None:
     """
     Parse an exported JSON file and interact with it
     """
-    games: List[Game] = list(from_export(from_))
+    games: List[Game] = list(from_export(from_file))
     click.secho("Use the 'games' variable to interact", fg="green")
     import IPython  # type: ignore[import]
 

@@ -5,7 +5,7 @@ Parse and Serialize the Game response from chess.com
 import json
 
 from datetime import datetime, timezone
-from typing import NamedTuple, List, Optional, Iterator
+from typing import NamedTuple, Optional, Iterator
 
 from .common import Json
 
