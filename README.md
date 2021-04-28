@@ -37,7 +37,7 @@ Requesting https://api.chess.com/pub/player/seanbreckenridge/games/2021/01
 Requires your username and a [token](https://lichess.org/account/oauth/token/create?description=lichess+export) (this requires no extra scopes). The token can be provided with the `--token` flag or by setting the `LICHESS_TOKEN` environment variable.
 
 ```
-$ python3 -m chess_export lichess export seanbreckenridge > data.json
+$ chess_export lichess export seanbreckenridge > data.json
 Requesting https://lichess.org/api/games/user/seanbreckenridge?pgnInJson=true
 ```
 
