@@ -1,29 +1,24 @@
-import io
-from setuptools import setup, find_packages
+from pathlib import Path
+from setuptools import setup, find_namespace_packages
 
-requirements = ["click>=7.0", "requests", "IPython"]
+reqs = Path("requirements.txt").read_text().strip().splitlines()
+long_description = Path("README.md").read_text()
 
-# Use the README.md content for the long description:
-with io.open("README.md", encoding="utf-8") as fo:
-    long_description = fo.read()
-
-pkg = "chessdotcom_export"
+pkg = "chess_export"
 setup(
     name=pkg,
-    version="0.1.3",
-    url="https://github.com/seanbreckenridge/chessdotcom_export",
+    version="0.1.0",
+    url="https://github.com/seanbreckenridge/chess_export",
     author="Sean Breckenridge",
     author_email="seanbrecke@gmail.com",
-    description=("""Export your chess.com games using the public API"""),
+    description="""Export your chess.com/lichess.org games""",
     long_description=long_description,
     long_description_content_type="text/markdown",
     license="MIT",
-    packages=find_packages(include=["chessdotcom_export"]),
-    install_requires=requirements,
+    packages=find_namespace_packages(),
+    install_requires=reqs,
     keywords="chess data",
-    entry_points={
-        "console_scripts": ["chessdotcom_export = chessdotcom_export.__main__:main"]
-    },
+    entry_points={"console_scripts": ["chess_export = chess_export.__main__:main"]},
     package_data={pkg: ["py.typed"]},
     extras_require={"testing": ["mypy"]},
     classifiers=[
