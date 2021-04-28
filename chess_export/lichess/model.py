@@ -1,5 +1,5 @@
 """
-Parse a
+Parse the Game response JSON object from lichess.org
 """
 
 import json
