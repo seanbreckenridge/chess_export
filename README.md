@@ -17,7 +17,7 @@ To install with pip, run:
 
 ## Usage
 
-Each subcommand (`chessdotcom`/`lichess`) has an `export` and `inspect` command -- export prints your games as JSON, `inspect` reads that dumped JSON file so you can use it in the REPL.
+Each subcommand (`chessdotcom`/`lichess`) has an `export` and `inspect` command -- `export` prints data about your games as JSON, `inspect` reads that dumped info so you can use it in the REPL.
 
 The `inspect` command just accepts the file as the first argument, like `chess_export lichess inspect data.json` or `chess_export chessdotcom inspect data.json`
 
@@ -43,7 +43,7 @@ Requesting https://lichess.org/api/games/user/seanbreckenridge?pgnInJson=true
 
 ### Example
 
-The games are described in [`PGN`](https://en.wikipedia.org/wiki/Portable_Game_Notation) (which can be parsed using the [`chess`](https://python-chess.readthedocs.io/en/latest/pgn.html) package), with the final board state in [`FEN`](https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation), also parseable using [`chess.Board`](https://python-chess.readthedocs.io/en/latest/core.html#chess.Board)
+The games are described in [`PGN`](https://en.wikipedia.org/wiki/Portable_Game_Notation) (which can be parsed using the [`chess`](https://python-chess.readthedocs.io/en/latest/pgn.html) package)
 
 ```
 $ chess_export chessdotcom export seanbreckenridge >data.json
@@ -69,6 +69,8 @@ d3d4
 c5d4
 f2f3
 ```
+
+The information returned by `chess.com`/`lichess` are slightly different, see the [lichess/model.py](chess_export/lichess/model.py) and [chessdotcom/model.py](chess_export/chessdotcom/model.py) files for reference
 
 ### Tests
 
