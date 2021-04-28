@@ -1,5 +1,5 @@
 from pathlib import Path
-from setuptools import setup, find_namespace_packages
+from setuptools import setup, find_namespace_packages  # type: ignore[import]
 
 reqs = Path("requirements.txt").read_text().strip().splitlines()
 long_description = Path("README.md").read_text()

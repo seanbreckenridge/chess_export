@@ -26,4 +26,4 @@ jobs:
           pip install mypy
       - name: Run mypy
         run: |
-          mypy ./chess_export
+          mypy ./chess_export setup.py
