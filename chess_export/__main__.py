@@ -64,7 +64,7 @@ def lichess() -> None:
     help="Lichess Personal API Access Token. See https://lichess.org/account/oauth/token",
 )
 @click.argument("username", type=str)
-def lichess_expot(username: str, token: str) -> None:
+def lichess_export(username: str, token: str) -> None:
     """
     Export your lichess games
     """
