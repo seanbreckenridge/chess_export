@@ -2,7 +2,7 @@
 
 [![PyPi version](https://img.shields.io/pypi/v/chess_export.svg)](https://pypi.python.org/pypi/chess_export) [![Python 3.7|3.8|3.9|3.10](https://img.shields.io/pypi/pyversions/chess_export.svg)](https://pypi.python.org/pypi/chess_export) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-Export your chess.com/lichess.org games using their APIs
+Export your (or someone else's) chess.com/lichess.org games using their APIs
 
 - Chess.com requires no authentication, see their [public API docs](https://www.chess.com/news/view/published-data-api)
 - Lichess requires you to create a token, you can do so by going [here](https://lichess.org/account/oauth/token/create?description=lichess+export) (this requires no extra scopes)
