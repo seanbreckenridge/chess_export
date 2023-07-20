@@ -50,9 +50,9 @@ class ChessDotComGame(NamedTuple):
         else:
             # username not in game
             return None
-        if result.result in {"win", "checkmated"}:
+        if result.result == 'win':
             return Result.WON
-        elif result.result in {"resigned", "timeout", "abandoned"}:
+        elif result.result in {"resigned", "timeout", "abandoned", "checkmated"}:
             return Result.LOSS
         elif result.result in {
             "agreed",
