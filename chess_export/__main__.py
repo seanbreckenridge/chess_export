@@ -47,7 +47,7 @@ def chessdotcom_inspect(from_file: str) -> None:
     click.secho("Use the 'games' variable to interact", fg="green")
     import IPython  # type: ignore[import]
 
-    IPython.embed()
+    IPython.embed()  # type: ignore[no-untyped-call]
 
 
 @main.group()
@@ -86,7 +86,7 @@ def lichess_inspect(from_file: str) -> None:
     click.secho("Use the 'games' variable to interact", fg="green")
     import IPython  # type: ignore[import]
 
-    IPython.embed()
+    IPython.embed()  # type: ignore[no-untyped-call]
 
 
 if __name__ == "__main__":

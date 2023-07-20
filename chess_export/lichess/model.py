@@ -7,7 +7,7 @@ import json
 from datetime import datetime, timezone
 from typing import NamedTuple, Optional, Iterator
 
-from ..common import Json
+from ..common import Json, Result
 
 
 class UserRating(NamedTuple):
@@ -44,6 +44,18 @@ class LichessGame(NamedTuple):
     winner: Optional[str]
     white: UserRating
     black: UserRating
+
+    def result(self, username: str) -> Optional[Result]:
+        winner = self.winner
+        if winner is None:
+            return None
+        elif winner == "white" and self.white.username == username:
+            return Result.WON
+        elif winner == "black" and self.black.username == username:
+            return Result.WON
+        else:
+            return Result.LOSS
+        # TODO: not sure how this represents a draw?
 
     @classmethod
     def from_api_response(cls, api_resp: Json) -> "LichessGame":

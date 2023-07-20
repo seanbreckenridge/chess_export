@@ -7,7 +7,7 @@ import json
 from datetime import datetime, timezone
 from typing import NamedTuple, Optional, Iterator
 
-from ..common import Json
+from ..common import Json, Result
 
 
 class ChessDotComUserRating(NamedTuple):
@@ -37,6 +37,34 @@ class ChessDotComGame(NamedTuple):
     rules: str
     white: ChessDotComUserRating
     black: ChessDotComUserRating
+
+    def result(self, username: str) -> Optional[Result]:
+        """
+        Return the result of the game for the given username
+        """
+        result: ChessDotComUserRating
+        if self.white.username == username:
+            result = self.white
+        elif self.black.username == username:
+            result = self.black
+        else:
+            # username not in game
+            return None
+        if result.result in {"win", "checkmated"}:
+            return Result.WON
+        elif result.result in {"resigned", "timeout", "abandoned"}:
+            return Result.LOSS
+        elif result.result in {
+            "agreed",
+            "stalemate",
+            "repetition",
+            "insufficient",
+            "timevsinsufficient",
+            "50move",
+        }:
+            return Result.DRAW
+        else:
+            return None
 
     @classmethod
     def from_api_response(cls, api_resp: Json) -> "ChessDotComGame":

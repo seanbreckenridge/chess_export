@@ -1,6 +1,7 @@
 import time
 from typing import Any, Optional
 from functools import partial
+from enum import Enum
 
 import click
 import requests
@@ -33,3 +34,9 @@ def safe_request(
             eprint(f"Warning: {url} recieved non 200 exit code: {resp.status_code}")
         time.sleep(sleep_time or SLEEP_TIME)
         return resp
+
+
+class Result(Enum):
+    WON = "won"
+    LOSS = "loss"
+    DRAW = "draw"
