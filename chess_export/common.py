@@ -19,6 +19,7 @@ def safe_request(
     url: str,
     sleep_time: Optional[float] = None,
     backoff_time: Optional[float] = None,
+    requested_count: int = 0,
     **kwargs: Any,
 ) -> requests.Response:
     eprint(f"Requesting {url}")
@@ -31,10 +32,16 @@ def safe_request(
         eprint(f"Text: {resp.text}")
         eprint(f"Headers: {json.dumps(dict(resp.headers), indent=2)}")
         time.sleep(backoff_time or BACKOFF_TIME)
+        if requested_count > 3:
+            resp.raise_for_status()
         # recursive call
-        kwargs["backoff_time"] = backoff_time
-        kwargs["sleep_time"] = sleep_time
-        return safe_request(url, **kwargs)
+        return safe_request(
+            url,
+            requested_count=requested_count + 1,
+            backoff_time=backoff_time,
+            sleep_time=sleep_time,
+            **kwargs,
+        )
     else:
         if resp.status_code != 200:
             eprint(f"Warning: {url} received non 200 exit code: {resp.status_code}")
