@@ -20,7 +20,7 @@ def _user_agent(user_agent_email: Optional[str]) -> Dict[str, str]:
 
 
 
-def get_player_game_archives(username: str, user_agent_email: Optional[str]) -> List[str]:
+def get_player_game_archives(username: str, user_agent_email: Optional[str] = None) -> List[str]:
     """Returns a list of monthly archive URLs for the user"""
     if user_agent_email is None and "CHESSDOTCOM_USER_AGENT_EMAIL" in os.environ:
         user_agent_email = os.environ["CHESSDOTCOM_USER_AGENT_EMAIL"]
@@ -29,7 +29,7 @@ def get_player_game_archives(username: str, user_agent_email: Optional[str]) -> 
     return list(mresp["archives"])
 
 
-def get_player_games(username: str, user_agent_email: Optional[str]) -> Iterator[Json]:
+def get_player_games(username: str, user_agent_email: Optional[str] = None) -> Iterator[Json]:
     """Returns all accessible games, using the monthly archive as the source"""
     if user_agent_email is None and "CHESSDOTCOM_USER_AGENT_EMAIL" in os.environ:
         user_agent_email = os.environ["CHESSDOTCOM_USER_AGENT_EMAIL"]
