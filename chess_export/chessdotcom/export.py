@@ -10,7 +10,9 @@ from ..common import Json, safe_request_json
 BASE_URL = "https://api.chess.com/pub/"
 
 
-def _user_agent(user_agent_email: Optional[str]) -> Dict[str, str]:
+def _user_agent(user_agent_email: Optional[str] = None) -> Dict[str, str]:
+    if user_agent_email is None and "CHESSDOTCOM_USER_AGENT_EMAIL" in os.environ:
+        user_agent_email = os.environ["CHESSDOTCOM_USER_AGENT_EMAIL"]
     if user_agent_email:
         return {
             "User-Agent": f"https://github.com/seanbreckenridge/chess_export {user_agent_email}"
@@ -22,8 +24,6 @@ def _user_agent(user_agent_email: Optional[str]) -> Dict[str, str]:
 
 def get_player_game_archives(username: str, user_agent_email: Optional[str] = None) -> List[str]:
     """Returns a list of monthly archive URLs for the user"""
-    if user_agent_email is None and "CHESSDOTCOM_USER_AGENT_EMAIL" in os.environ:
-        user_agent_email = os.environ["CHESSDOTCOM_USER_AGENT_EMAIL"]
     url = BASE_URL + "/".join(("player", username, "games", "archives"))
     mresp = safe_request_json(url, headers=_user_agent(user_agent_email))
     return list(mresp["archives"])
@@ -31,8 +31,6 @@ def get_player_game_archives(username: str, user_agent_email: Optional[str] = No
 
 def get_player_games(username: str, user_agent_email: Optional[str] = None) -> Iterator[Json]:
     """Returns all accessible games, using the monthly archive as the source"""
-    if user_agent_email is None and "CHESSDOTCOM_USER_AGENT_EMAIL" in os.environ:
-        user_agent_email = os.environ["CHESSDOTCOM_USER_AGENT_EMAIL"]
     for archive_url in get_player_game_archives(username, user_agent_email):
         month_games = safe_request_json(archive_url, headers=_user_agent(user_agent_email))
         yield from month_games["games"]
