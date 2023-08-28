@@ -9,7 +9,7 @@ Export your (or someone else's) chess.com/lichess.org games using their APIs
 
 ## Installation
 
-Requires `python3.7+`
+Requires `python3.8+`
 
 To install with pip, run:
 
