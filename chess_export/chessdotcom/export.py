@@ -26,6 +26,8 @@ def get_player_game_archives(username: str, user_agent_email: Optional[str] = No
     """Returns a list of monthly archive URLs for the user"""
     url = BASE_URL + "/".join(("player", username, "games", "archives"))
     mresp = safe_request_json(url, headers=_user_agent(user_agent_email))
+    if "archives" not in mresp:
+        raise RuntimeError(f"Unexpected response from {url}: {mresp}")
     return list(mresp["archives"])
 
 
@@ -33,4 +35,7 @@ def get_player_games(username: str, user_agent_email: Optional[str] = None) -> I
     """Returns all accessible games, using the monthly archive as the source"""
     for archive_url in get_player_game_archives(username, user_agent_email):
         month_games = safe_request_json(archive_url, headers=_user_agent(user_agent_email))
-        yield from month_games["games"]
+        if "games" in month_games:
+            yield from month_games["games"]
+        else:
+            raise RuntimeError(f"Unexpected response from {archive_url}: {month_games}")
