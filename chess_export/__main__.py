@@ -1,5 +1,5 @@
 import json
-from typing import List
+from typing import List, Optional
 
 import click
 
@@ -24,12 +24,20 @@ def chessdotcom() -> None:
 
 
 @chessdotcom.command(name="export")
+@click.option(
+    "--user-agent-email",
+    help="Email to use as User-Agent header, if you're getting 403 errors",
+    type=str,
+    default=None,
+    envvar="CHESSDOTCOM_USER_AGENT_EMAIL",
+    show_envvar=True,
+)
 @click.argument("username", type=str)
-def chessdotcom_export(username: str) -> None:
+def chessdotcom_export(username: str, user_agent_email: Optional[str]) -> None:
     """
     Export your chess.com games
     """
-    games: List[Json] = list(chessdotcom_get_games(username))
+    games: List[Json] = list(chessdotcom_get_games(username, user_agent_email))
     click.echo(json.dumps(games, sort_keys=True))
 
 

@@ -32,6 +32,10 @@ Requesting https://api.chess.com/pub/player/seanbreckenridge/games/2021/01
 ...
 ```
 
+If you're getting 403 errors, you may have to supply a user agent with your email, see [this forum thread](https://www.chess.com/clubs/forum/view/error-403-in-member-profile)
+
+TO do that, you can pass the `--user-agent-email` flag or set the `CHESSDOTCOM_USER_AGENT_EMAIL` environment variable.
+
 ### lichess export
 
 Requires your username and a [token](https://lichess.org/account/oauth/token/create?description=lichess+export) (this requires no extra scopes). The token can be provided with the `--token` flag or by setting the `LICHESS_TOKEN` environment variable.
