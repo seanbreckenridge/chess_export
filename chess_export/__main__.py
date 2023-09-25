@@ -51,7 +51,7 @@ def chessdotcom_inspect(from_file: str) -> None:
     """
     Parse an exported chess.com JSON file and interact with it
     """
-    games: List[ChessDotComGame] = list(chessdotcom_from_export(from_file))
+    games: List[ChessDotComGame] = list(chessdotcom_from_export(from_file))  # noqa
     click.secho("Use the 'games' variable to interact", fg="green")
     import IPython  # type: ignore[import]
 
@@ -90,7 +90,7 @@ def lichess_inspect(from_file: str) -> None:
     """
     Parse an exported chess.com JSON file and interact with it
     """
-    games: List[LichessGame] = list(lichess_from_export(from_file))
+    games: List[LichessGame] = list(lichess_from_export(from_file))  # noqa
     click.secho("Use the 'games' variable to interact", fg="green")
     import IPython  # type: ignore[import]
 
