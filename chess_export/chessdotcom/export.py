@@ -20,9 +20,9 @@ def _user_agent(user_agent_email: Optional[str] = None) -> Dict[str, str]:
     return {}
 
 
-
-
-def get_player_game_archives(username: str, user_agent_email: Optional[str] = None) -> List[str]:
+def get_player_game_archives(
+    username: str, user_agent_email: Optional[str] = None
+) -> List[str]:
     """Returns a list of monthly archive URLs for the user"""
     url = BASE_URL + "/".join(("player", username, "games", "archives"))
     mresp = safe_request_json(url, headers=_user_agent(user_agent_email))
@@ -31,10 +31,14 @@ def get_player_game_archives(username: str, user_agent_email: Optional[str] = No
     return list(mresp["archives"])
 
 
-def get_player_games(username: str, user_agent_email: Optional[str] = None) -> Iterator[Json]:
+def get_player_games(
+    username: str, user_agent_email: Optional[str] = None
+) -> Iterator[Json]:
     """Returns all accessible games, using the monthly archive as the source"""
     for archive_url in get_player_game_archives(username, user_agent_email):
-        month_games = safe_request_json(archive_url, headers=_user_agent(user_agent_email))
+        month_games = safe_request_json(
+            archive_url, headers=_user_agent(user_agent_email)
+        )
         if "games" in month_games:
             yield from month_games["games"]
         else:
